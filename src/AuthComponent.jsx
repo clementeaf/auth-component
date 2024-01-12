@@ -30,7 +30,12 @@ export default function AuthComponent() {
           try {
             setFieldsRequired("Sending the request...");
             const response = await fetchRegisterUser(values);
-            if (response.status === 200) setFieldsRequired(response.data);
+            if (response.status === 200) {
+              const success = (
+                <p className="w-[300px]">{`${response.data}. Redirigiendo`}</p>
+              );
+              setFieldsRequired(success);
+            }
           } catch (error) {
             console.error("Error during user registration:", error);
             setFieldsRequired("Error during user registration");
@@ -75,7 +80,7 @@ export default function AuthComponent() {
             <button
               type="submit"
               className={`py-1 rounded-md transition duration-300 ease-in-out ${
-                fieldsRequired === "Sign in" ? "bg-black text-white" : ""
+                fieldsRequired == null ? "bg-black text-white" : ""
               }`}
               disabled={fieldsRequired != null}
               onMouseOver={() => {
@@ -92,12 +97,12 @@ export default function AuthComponent() {
               {fieldsRequired ? fieldsRequired : "Sign in"}
             </button>
 
-            <div className="flex items-center my-3">
-              <div className="w-[100px] h-[1px] bg-black/15" />
+            <div className="flex w-[300px] items-center my-3">
+              <div className="w-[150px] h-[1px] bg-black/15" />
               <span className="px-[23px] text-sm font-light text-black/50">
                 or
               </span>
-              <div className="w-[100px] h-[1px] bg-black/15" />
+              <div className="w-[150px] h-[1px] bg-black/15" />
             </div>
 
             <button type="button" className="text-light text-black/50">

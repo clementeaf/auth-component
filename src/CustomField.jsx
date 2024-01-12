@@ -3,7 +3,7 @@ import { Field } from "formik";
 
 export default function CustomField({value, name, state, handleFocus, applyPositionStyle, type}) {
   return (
-    <div className="flex flex-col items-start justify-start">
+    <div className="flex w-[300px] flex-col items-start justify-start">
       <label
         htmlFor={name}
         className={state ? "" : applyPositionStyle(value)}
