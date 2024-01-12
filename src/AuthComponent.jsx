@@ -37,6 +37,7 @@ export default function AuthComponent() {
       <Formik
         initialValues={initialValues}
         onSubmit={async (values, { setSubmitting }) => {
+          console.log(values);
           setFieldsRequired("Sending the request...");
         }}
       >
@@ -48,6 +49,7 @@ export default function AuthComponent() {
             <CustomField
               value={values.user}
               name="user"
+              type="text"
               state={userPosition}
               handleFocus={handleUserFocus}
               applyPositionStyle={applyPositionStyle}
@@ -56,6 +58,7 @@ export default function AuthComponent() {
             <CustomField
               value={values.password}
               name="password"
+              type="password"
               state={passwordPosition}
               handleFocus={handlePasswordFocus}
               applyPositionStyle={applyPositionStyle}

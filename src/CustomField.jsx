@@ -1,7 +1,7 @@
 import React from "react";
 import { Field } from "formik";
 
-export default function CustomField({value, name, state, handleFocus, applyPositionStyle}) {
+export default function CustomField({value, name, state, handleFocus, applyPositionStyle, type}) {
   return (
     <div className="flex flex-col items-start justify-start">
       <label
@@ -13,6 +13,7 @@ export default function CustomField({value, name, state, handleFocus, applyPosit
       <Field
         id={name}
         name={name}
+        type={type}
         className="flex w-full border rounded-md px-2 py-1"
         onFocus={handleFocus}
       />
