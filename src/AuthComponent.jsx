@@ -14,7 +14,6 @@ export default function AuthComponent() {
   const handleResetPosition = (event, values) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       if (!values.user && !values.password) {
-        // Assuming these functions are defined somewhere
         setPasswordPosition(false);
         setUserPosition(false);
       }
