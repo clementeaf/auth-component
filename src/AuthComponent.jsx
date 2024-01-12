@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import { forgotPasswordLinkMessage, initialValues, style } from "../config";
 import CustomField from "./CustomField";
+import { fetchRegisterUser } from "./services/fetchInstaces";
 
 export default function AuthComponent() {
   const [fieldsRequired, setFieldsRequired] = useState(null);
@@ -25,9 +26,15 @@ export default function AuthComponent() {
       <h1>Welcome!</h1>
       <Formik
         initialValues={initialValues}
-        onSubmit={async (values, { setSubmitting }) => {
-          console.log(values);
-          setFieldsRequired("Sending the request...");
+        onSubmit={async (values) => {
+          try {
+            setFieldsRequired("Sending the request...");
+            const response = await fetchRegisterUser(values);
+            if (response.status === 200) setFieldsRequired(response.data);
+          } catch (error) {
+            console.error("Error during user registration:", error);
+            setFieldsRequired("Error during user registration");
+          }
         }}
       >
         {({ values }) => (
@@ -67,7 +74,9 @@ export default function AuthComponent() {
 
             <button
               type="submit"
-              className="bg-black text-white py-1 rounded-md transition duration-300 ease-in-out"
+              className={`py-1 rounded-md transition duration-300 ease-in-out ${
+                fieldsRequired === "Sign in" ? "bg-black text-white" : ""
+              }`}
               disabled={fieldsRequired != null}
               onMouseOver={() => {
                 if (!values.user || !values.password) {
