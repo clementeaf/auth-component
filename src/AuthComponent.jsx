@@ -4,31 +4,21 @@ import { forgotPasswordLinkMessage, initialValues, style } from "../config";
 import CustomField from "./CustomField";
 
 export default function AuthComponent() {
-  const [passwordPosition, setPasswordPosition] = useState(false);
-  const [userPosition, setUserPosition] = useState(false);
   const [fieldsRequired, setFieldsRequired] = useState(null);
+  const [activeField, setActiveField] = useState(null);
 
-  const handlePasswordFocus = () => {
-    setPasswordPosition(true);
-    setUserPosition(false);
-  };
-
-  const handleUserFocus = () => {
-    setUserPosition(true);
-    setPasswordPosition(false);
+  const handleFieldFocus = (field) => {
+    setActiveField(field);
   };
 
   const handleResetPosition = (event, values) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       if (!values.user && !values.password) {
+        // Assuming these functions are defined somewhere
         setPasswordPosition(false);
         setUserPosition(false);
       }
     }
-  };
-
-  const applyPositionStyle = (value) => {
-    return value.length > 0 ? style.noPosition : style.initialPosition;
   };
 
   return (
@@ -50,18 +40,26 @@ export default function AuthComponent() {
               value={values.user}
               name="user"
               type="text"
-              state={userPosition}
-              handleFocus={handleUserFocus}
-              applyPositionStyle={applyPositionStyle}
+              state={activeField === "user"}
+              handleFocus={() => handleFieldFocus("user")}
+              applyPositionStyle={() =>
+                values.user.length > 0
+                  ? style.noPosition
+                  : style.initialPosition
+              }
             />
 
             <CustomField
               value={values.password}
               name="password"
               type="password"
-              state={passwordPosition}
-              handleFocus={handlePasswordFocus}
-              applyPositionStyle={applyPositionStyle}
+              state={activeField === "password"}
+              handleFocus={() => handleFieldFocus("password")}
+              applyPositionStyle={() =>
+                values.password.length > 0
+                  ? style.noPosition
+                  : style.initialPosition
+              }
             />
 
             <p className="font-light text-black/50 my-4">

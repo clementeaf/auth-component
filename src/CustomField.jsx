@@ -14,7 +14,7 @@ export default function CustomField({value, name, state, handleFocus, applyPosit
         id={name}
         name={name}
         type={type}
-        className="flex w-full border rounded-md px-2 py-1"
+        className="flex w-full border rounded-md px-2 pl-3 py-1"
         onFocus={handleFocus}
       />
     </div>
