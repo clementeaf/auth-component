@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import { forgotPasswordLinkMessage, initialValues, style } from "../config";
 import CustomField from "./CustomField";
-import { fetchRegisterUser } from "./services/fetchInstaces";
+import { fetchLoginUser } from "./services/fetchInstaces";
 
 export default function AuthComponent() {
   const [fieldsRequired, setFieldsRequired] = useState(null);
@@ -29,10 +29,10 @@ export default function AuthComponent() {
         onSubmit={async (values) => {
           try {
             setFieldsRequired("Sending the request...");
-            const response = await fetchRegisterUser(values);
+            const response = await fetchLoginUser(values);
             if (response.status === 200) {
               const success = (
-                <p className="w-[300px]">{`${response.data}. Redirigiendo`}</p>
+                <p className="w-[300px]">Login success. Redirecting</p>
               );
               setFieldsRequired(success);
             }
