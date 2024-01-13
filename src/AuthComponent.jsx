@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
-import { forgotPasswordLinkMessage, initialValues, style } from "../config";
+import { forgotPasswordLinkMessage, initialValues } from "../config";
 import CustomField from "./CustomField";
 import { fetchLoginUser } from "./services/fetchInstaces";
 
 export default function AuthComponent() {
   const [fieldsRequired, setFieldsRequired] = useState(null);
-  const [activeField, setActiveField] = useState(null);
-
-  const handleFieldFocus = (field) => {
-    setActiveField(field);
-  };
-
-  const handleResetPosition = (event, values) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
-      if (!values.user && !values.password) {
-        setPasswordPosition(false);
-        setUserPosition(false);
-      }
-    }
-  };
+  const [fieldName, setFieldName] = useState(null);
 
   return (
     <div className="flex flex-col items-center justify-center p-10 gap-4 rounded-md shadow-md bg-white">
@@ -48,29 +35,17 @@ export default function AuthComponent() {
             onBlur={(event) => handleResetPosition(event, values)}
           >
             <CustomField
-              value={values.user}
               name="user"
               type="text"
-              state={activeField === "user"}
-              handleFocus={() => handleFieldFocus("user")}
-              applyPositionStyle={() =>
-                values.user.length > 0
-                  ? style.noPosition
-                  : style.initialPosition
-              }
+              fieldName={fieldName}
+              handleFieldName={() => setFieldName("user")}
             />
 
             <CustomField
-              value={values.password}
               name="password"
               type="password"
-              state={activeField === "password"}
-              handleFocus={() => handleFieldFocus("password")}
-              applyPositionStyle={() =>
-                values.password.length > 0
-                  ? style.noPosition
-                  : style.initialPosition
-              }
+              fieldName={fieldName}
+              handleFieldName={() => setFieldName("password")}
             />
 
             <p className="font-light text-black/50 my-4">

@@ -1,13 +1,16 @@
-import React from "react";
 import { Field } from "formik";
+import { style } from "../config";
 
-export default function CustomField({value, name, state, handleFocus, applyPositionStyle, type}) {
+export default function CustomField({
+  name,
+  type,
+  fieldName,
+  handleFieldName
+}) {
+
   return (
     <div className="flex w-[300px] flex-col items-start justify-start">
-      <label
-        htmlFor={name}
-        className={state ? "" : applyPositionStyle(value)}
-      >
+      <label htmlFor={name} className={fieldName == name ? style.noPosition : style.initialPosition}>
         <p className="capitalize">{name}</p>
       </label>
       <Field
@@ -15,7 +18,7 @@ export default function CustomField({value, name, state, handleFocus, applyPosit
         name={name}
         type={type}
         className="flex w-full border rounded-md px-2 pl-3 py-1"
-        onFocus={handleFocus}
+        onClick={handleFieldName}
       />
     </div>
   );
