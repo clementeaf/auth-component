@@ -32,7 +32,6 @@ export default function AuthComponent() {
         {({ values }) => (
           <Form
             className="flex flex-col w-full gap-2"
-            onBlur={(event) => handleResetPosition(event, values)}
           >
             <CustomField
               name="user"
