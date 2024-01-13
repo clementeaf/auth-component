@@ -57,7 +57,7 @@ export default function AuthComponent() {
               className={`py-1 rounded-md transition duration-300 ease-in-out ${
                 fieldsRequired == null ? "bg-black text-white" : ""
               }`}
-              disabled={fieldsRequired != null}
+              disabled={!values.password || !values.user}
               onMouseOver={() => {
                 if (!values.user || !values.password) {
                   setFieldsRequired("Both fields are required");
