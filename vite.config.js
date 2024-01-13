@@ -9,5 +9,11 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: ['js-big-decimal']
-  }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@services': path.resolve(__dirname, './src/services'),
+    },
+  },
 })
